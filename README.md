@@ -1,34 +1,54 @@
-## Overview
+# cms5x-auth
 
-[![CI](https://github.com/silverstripe/silverstripe-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-installer/actions/workflows/ci.yml)
-[![Silverstripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
+A small Silverstripe 5 app where we build a reusable **OAuth2 authorization server**: this host issues tokens to apps, rather than acting as an OAuth client of someone else.
 
-Base project folder for a Silverstripe ([http://silverstripe.org](http://silverstripe.org)) installation. Required modules are installed via [http://github.com/silverstripe/recipe-cms](http://github.com/silverstripe/recipe-cms). For information on how to change the dependencies in a recipe, please have a look at [https://github.com/silverstripe/recipe-plugin](https://github.com/silverstripe/recipe-plugin). In addition, installer includes [theme/simple](https://github.com/silverstripe-themes/silverstripe-simple) as a default theme.
+The intended foundations are [`league/oauth2-server`](https://oauth2.thephpleague.com/) (protocol) and [`archipro/silverstripe-wellknown`](https://github.com/archiprocode/silverstripe-well-known) (discovery and JWKS). This installer does not require those packages yet; [ROADMAP.md](ROADMAP.md) is the scope and sequence, including the step that adds them.
 
-## Installation
+ArchiPro already has outbound OAuth **clients** (for example Xero under `app/src/Component/Integration/Xero/` in [archipro-website](https://github.com/archiprocode/archipro-website)). Those use `league/oauth2-client` and are unrelated to this server. This app is where the shared **server** shape is tried before anything is installed on the website.
+
+## Approach
+
+Build the server here until the handshake quality gate in the roadmap passes. Then extract Composer package `archipro/silverstripe-oauth2-server` for other Silverstripe 5 hosts. [archipro-website](https://github.com/archiprocode/archipro-website) is the first intended consumer; how that host rebinds Injector ports is in the roadmap’s adoption section, not in this README.
+
+## Compatibility
+
+The sandbox runs PHP 8.3 and MySQL 8.0, the same majors as the website (CI image `mysql:8.0.32`, PHP 8.3). Packages extracted later must install on Silverstripe 5.
+
+Do not change the website repo in this stage.
+
+## Out of scope for now
+
+- Provider-specific product flows
+- A CMS login module (Opauth, Bigfork, and similar exist; we have not chosen one)
+- Edits to archipro-website
+- Outbound OAuth client helpers (`league/oauth2-client`)
+
+## Start DDEV
+
+From the repo root:
 
 ```sh
-composer create-project silverstripe/installer my-app
+ddev start
+ddev composer install
 ```
 
-See [Getting Started](https://docs.silverstripe.org/en/getting_started/) for more information.
+The site is at `https://cms5x-auth.ddev.site`. `vendor/` is gitignored, so Composer install is required after a fresh clone.
 
-## Bugtracker
+If `.env` is missing, copy `.env.example` and set `SS_DATABASE_SERVER`, `SS_DATABASE_USERNAME`, `SS_DATABASE_PASSWORD`, and `SS_DATABASE_NAME` to `db` (DDEV’s database service). Then:
 
-Bugs are tracked on github.com ([framework issues](https://github.com/silverstripe/silverstripe-framework/issues),
-[cms issues](https://github.com/silverstripe/silverstripe-cms/issues)).
-Please read our [issue reporting guidelines](https://docs.silverstripe.org/en/contributing/issues_and_bugs/).
+```sh
+ddev sake dev/build
+```
 
-## Development and Contribution
+## Tests
 
-If you would like to make changes to the Silverstripe core codebase, we have an extensive [guide to contributing code](https://docs.silverstripe.org/en/contributing/code/).
+`ddev test` is a custom command that runs `vendor/bin/phpunit` with any extra arguments you pass.
 
-## Links
+The Default suite in `phpunit.xml.dist` also runs Silverstripe CMS and framework tests. For day-to-day work, pass a project path so you do not wait on core:
 
- * [Changelogs](https://docs.silverstripe.org/en/changelogs/)
- * [Bugtracker: Framework](https://github.com/silverstripe/silverstripe-framework/issues)
- * [Bugtracker: CMS](https://github.com/silverstripe/silverstripe-cms/issues)
- * [Bugtracker: Installer](https://github.com/silverstripe/silverstripe-installer/issues)
- * [Forums](http://silverstripe.org/forums)
- * [Developer Mailinglist](https://groups.google.com/forum/#!forum/silverstripe-dev)
- * [License](./LICENSE)
+```sh
+ddev test app/tests
+ddev test app/tests/MyTest.php
+```
+
+`app/tests` does not exist yet.

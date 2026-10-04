@@ -1,14 +1,14 @@
-name: cms5x
+name: cms5x-auth
 type: silverstripe
 docroot: public
-php_version: "8.2"
+php_version: "8.3"
 webserver_type: apache-fpm
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-    type: mariadb
-    version: "10.11"
+    type: mysql
+    version: "8.0"
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []

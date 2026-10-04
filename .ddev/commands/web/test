@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Run unit tests
+## Usage: test [args]
+## Example: "ddev test" or "ddev test app/tests/MyTest.php"
+
+vendor/bin/phpunit "$@"
