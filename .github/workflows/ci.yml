@@ -5,23 +5,23 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   ci:
     name: CI
+    permissions:
+      pull-requests: read
+      contents: read
+      actions: write
     uses: silverstripe/gha-ci/.github/workflows/ci.yml@v1
     with:
-      # installer contains a sample behat.yml file, though there are no behat tests to run
+      dynamic_matrix: false
+      js: false
       endtoend: false
-      # require the following in ci.yml rather than composer.json require-dev specifically for installer because unlike
-      # regular modules, require-dev will get installed to projects during `composer create-project silverstripe/installer`
-      composer_require_extra: silverstripe/recipe-testing:^3 silverstripe/frameworktest:^1 mikey179/vfsstream:^1.6.10
+      doclinting: false
       extra_jobs: |
-        - endtoend: true
-          endtoend_suite: admin
-          endtoend_config: vendor/silverstripe/admin/behat.yml
-        - endtoend: true
-          endtoend_suite: asset-admin
-          endtoend_config: vendor/silverstripe/asset-admin/behat.yml
-        - endtoend: true
-          endtoend_suite: cms
-          endtoend_config: vendor/silverstripe/cms/behat.yml
+        - php: '8.3'
+          db: mysql80
+          phpunit: true
+          phplinting: false
