@@ -20,8 +20,10 @@ jobs:
       js: false
       endtoend: false
       doclinting: false
+      composer_install: true
       extra_jobs: |
         - php: '8.3'
           db: mysql80
           phpunit: true
           phplinting: true
+          composer_install: true
