@@ -24,4 +24,4 @@ jobs:
         - php: '8.3'
           db: mysql80
           phpunit: true
-          phplinting: false
+          phplinting: true

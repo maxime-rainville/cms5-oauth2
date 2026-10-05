@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Run PHPStan, PHPCS, then PHPUnit
+## Usage: check
+## Example: "ddev check"
+
+composer check

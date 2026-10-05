@@ -21,8 +21,8 @@ SilverStripe\Security\Member:
 
 ArchiPro\Silverstripe\EventDispatcher\Service\EventService:
   loaders:
-    - MemberListenerLoader
+    - App\MemberListenerLoader
   listeners:
-    FormSubmittedEvent:
-      - ['FormSubmittedEventListener', 'handleEvent']
+    App\FormSubmittedEvent:
+      - ['App\FormSubmittedEventListener', 'handleEvent']
 

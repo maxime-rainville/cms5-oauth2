@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Run PHPStan
+## Usage: phpstan [args]
+## Example: "ddev phpstan" or "ddev phpstan --memory-limit=1G"
+
+composer phpstan -- "$@"
