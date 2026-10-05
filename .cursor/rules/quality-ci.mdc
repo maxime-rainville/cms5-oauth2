@@ -1,0 +1,38 @@
+---
+description: Local and CI quality gates for this sandbox (PHPUnit, PHPStan, PHPCS).
+alwaysApply: true
+---
+
+# Quality tools
+
+This repo is a Silverstripe 5 installer sandbox. Day-to-day quality gates are PHPUnit, PHPStan (Silverstan), and PHPCS (PSR-12). There is no Behat job yet.
+
+## Setup
+
+From the repo root:
+
+```sh
+ddev start
+ddev composer install
+```
+
+## Commands (DDEV)
+
+Prefer DDEV wrappers. They call the Composer scripts of the same name.
+
+| Gate | Command |
+|------|---------|
+| PHPUnit (`app/tests` only) | `ddev test` |
+| PHPStan (level 9, `app/src` and `app/tests`) | `ddev phpstan` |
+| PHPCS (PSR-12, `app`) | `ddev phpcs` |
+| PHPStan, PHPCS, then PHPUnit | `ddev check` |
+
+Composer equivalents: `ddev composer test`, `ddev composer phpstan`, `ddev composer phpcs`, `ddev composer lint` (alias of phpcs), `ddev composer check`.
+
+## CI
+
+GitHub Actions is `.github/workflows/ci.yml`. It uses `silverstripe/gha-ci` with one PHP 8.3 + MySQL 8.0 job: PHPUnit and PHP lint (phpcs then phpstan). End-to-end, JS, and doclint jobs are off.
+
+Do not add a PHPStan baseline file. Fix `app/` instead.
+
+Installer `Page` and `PageController` stay in the global namespace. Other new PHP should use a real namespace (e.g. `App\`).
