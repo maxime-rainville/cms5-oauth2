@@ -42,13 +42,21 @@ ddev sake dev/build
 
 ## Tests
 
-`ddev test` is a custom command that runs `vendor/bin/phpunit` with any extra arguments you pass.
-
-The Default suite in `phpunit.xml.dist` also runs Silverstripe CMS and framework tests. For day-to-day work, pass a project path so you do not wait on core:
+`ddev test` runs the Default PHPUnit suite (`app/tests` only). Extra arguments are forwarded:
 
 ```sh
-ddev test app/tests
-ddev test app/tests/MyTest.php
+ddev test
+ddev test app/tests/SmokeTest.php
 ```
 
-`app/tests` does not exist yet.
+## Quality tools
+
+Same tools as CI, local via DDEV (or `ddev composer …`):
+
+```sh
+ddev phpstan
+ddev phpcs
+ddev check
+```
+
+`ddev check` runs PHPStan, PHPCS, then PHPUnit. Agents: see `.cursor/rules/quality-ci.mdc`. CI: `.github/workflows/ci.yml`.
