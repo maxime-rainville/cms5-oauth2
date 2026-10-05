@@ -9,18 +9,14 @@
         "silverstripe/recipe-cms": "5.x-dev",
         "silverstripe-themes/simple": "3.x-dev",
         "silverstripe/login-forms": "5.x-dev",
-        "archipro/silverstripe-revolt-event-dispatcher": "0.x-dev",
-        "archipro/silverstripe-db-enum": "dev-claude/add-silverstripe-db-types-01Q1QfLmvNyCgpKK2RLVob2t"
+        "archipro/silverstripe-revolt-event-dispatcher": "0.x-dev"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:archiprocode/silverstripe-db-enum.git"
-        }
-    ],
     "require-dev": {
         "phpunit/phpunit": "^9.6",
         "phpstan/phpstan": "^1.12"
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "project-files-installed": [
