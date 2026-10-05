@@ -2,47 +2,32 @@
 
 namespace {
 
+    use App\FormSubmittedEvent;
     use ArchiPro\Silverstripe\EventDispatcher\Service\EventService;
     use SilverStripe\CMS\Controllers\ContentController;
-    use SilverStripe\EventDispatcher\Symfony\Event;
+    use SilverStripe\Control\HTTPResponse;
     use SilverStripe\Forms\FieldList;
     use SilverStripe\Forms\Form;
     use SilverStripe\Forms\FormAction;
     use SilverStripe\Forms\TextField;
+    use SilverStripe\ORM\FieldType\DBHTMLText;
+
     /**
-     * @template T of Page
-     * @extends ContentController<T>
+     * Site tree controller for this installer. Serves the demo contact form.
+     *
+     * @extends ContentController<Page>
      */
     class PageController extends ContentController
     {
         /**
-         * An array of actions that can be accessed via a request. Each array element should be an action name, and the
-         * permissions or conditions required to allow the user to access it.
-         *
-         * <code>
-         * [
-         *     'action', // anyone can access this action
-         *     'action' => true, // same as above
-         *     'action' => 'ADMIN', // you must have ADMIN permissions to access this action
-         *     'action' => '->checkAction' // you can only access this action if $this->checkAction() returns true
-         * ];
-         * </code>
-         *
-         * @var array
+         * @var array<string, bool>
          */
         private static $allowed_actions = [
-            'Form',
-            'success'
+            'Form' => true,
+            'success' => true,
         ];
 
-        protected function init()
-        {
-            parent::init();
-            // You can include any CSS or JS required by your project here.
-            // See: https://docs.silverstripe.org/en/developer_guides/templates/requirements/
-        }
-
-        public function Form()
+        public function Form(): Form
         {
             return Form::create(
                 $this,
@@ -56,19 +41,21 @@ namespace {
                         'Submit'
                     )
                 ]),
-
             );
         }
 
-        public function doSubmit(array $data, Form $form)
+        /**
+         * @param array<string, mixed> $data
+         */
+        public function doSubmit(array $data, Form $form): HTTPResponse
         {
             EventService::singleton()->dispatch(new FormSubmittedEvent($form->getName(), $data));
             return $this->redirect($this->Link('success'));
         }
 
-        public function success()
+        public function success(): DBHTMLText
         {
-            return $this->renderWith('Page',[
+            return $this->renderWith('Page', [
                 'Title' => 'Success',
                 'Content' => 'Form submitted successfully',
                 'Form' => null
