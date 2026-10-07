@@ -1,7 +1,5 @@
 <?php
 
-use Revolt\EventLoop;
-use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPApplication;
 use SilverStripe\Control\HTTPRequestBuilder;
 use SilverStripe\Core\CoreKernel;
@@ -23,17 +21,5 @@ $request = HTTPRequestBuilder::createFromEnvironment();
 // Default application
 $kernel = new CoreKernel(BASE_PATH);
 $app = new HTTPApplication($kernel);
-
-try {
-    $response = $app->handle($request);
-    $response->output();
-} finally {
-    session_write_close();
-    fastcgi_finish_request();
-
-    $controller = new Controller();
-    $controller->setRequest($request);
-    $controller->pushCurrent();
-    EventLoop::run();
-}
-
+$response = $app->handle($request);
+$response->output();

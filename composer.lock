@@ -4,121 +4,36 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9656a66155eb6e8ab54ccc98f99f124c",
+    "content-hash": "9a5ffb56070a91ad126d82442e65493a",
     "packages": [
         {
-            "name": "amphp/amp",
-            "version": "v3.1.3",
+            "name": "archipro/silverstripe-wellknown",
+            "version": "0.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/amphp/amp.git",
-                "reference": "73c38b323ff8d790abf0f76c56fcc892bda4111a"
+                "url": "https://github.com/archiprocode/silverstripe-well-known.git",
+                "reference": "f27039c8a8d30567751fc74ed3b33c6326fcfc0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/73c38b323ff8d790abf0f76c56fcc892bda4111a",
-                "reference": "73c38b323ff8d790abf0f76c56fcc892bda4111a",
+                "url": "https://api.github.com/repos/archiprocode/silverstripe-well-known/zipball/f27039c8a8d30567751fc74ed3b33c6326fcfc0c",
+                "reference": "f27039c8a8d30567751fc74ed3b33c6326fcfc0c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "revolt/event-loop": "^1 || ^0.2"
-            },
-            "require-dev": {
-                "amphp/php-cs-fixer-config": "^2",
-                "phpunit/phpunit": "^9",
-                "psalm/phar": "6.16.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/functions.php",
-                    "src/Future/functions.php",
-                    "src/Internal/functions.php"
-                ],
-                "psr-4": {
-                    "Amp\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aaron Piotrowski",
-                    "email": "aaron@trowski.com"
-                },
-                {
-                    "name": "Bob Weinand",
-                    "email": "bobwei9@hotmail.com"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                },
-                {
-                    "name": "Daniel Lowrey",
-                    "email": "rdlowrey@php.net"
-                }
-            ],
-            "description": "A non-blocking concurrency framework for PHP applications.",
-            "homepage": "https://amphp.org/amp",
-            "keywords": [
-                "async",
-                "asynchronous",
-                "awaitable",
-                "concurrency",
-                "event",
-                "event-loop",
-                "future",
-                "non-blocking",
-                "promise"
-            ],
-            "support": {
-                "issues": "https://github.com/amphp/amp/issues",
-                "source": "https://github.com/amphp/amp/tree/v3.1.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/amphp",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-07-19T17:59:20+00:00"
-        },
-        {
-            "name": "archipro/revolt-event-dispatcher",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/archiprocode/revolt-event-dispatcher.git",
-                "reference": "f925a65817002d882ca869e4d55b711e61d8ea27"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/archiprocode/revolt-event-dispatcher/zipball/f925a65817002d882ca869e4d55b711e61d8ea27",
-                "reference": "f925a65817002d882ca869e4d55b711e61d8ea27",
-                "shasum": ""
-            },
-            "require": {
-                "amphp/amp": "^3.0",
                 "php": "^8.1",
-                "psr/event-dispatcher": "^1.0",
-                "revolt/event-loop": "^1.0"
-            },
-            "provide": {
-                "psr/event-dispatcher-implementation": "1.0"
+                "silverstripe/framework": "^5.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.14",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.0"
+                "cambis/silverstan": "^2.0",
+                "phpunit/phpunit": "^9.5",
+                "silverstripe/recipe-cms": "^5",
+                "squizlabs/php_codesniffer": "^3.6"
             },
-            "type": "library",
+            "type": "silverstripe-vendormodule",
             "autoload": {
                 "psr-4": {
-                    "ArchiPro\\EventDispatcher\\": "src/"
+                    "Archipro\\SilverstripeWellKnown\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -128,69 +43,15 @@
             "authors": [
                 {
                     "name": "ArchiPro",
-                    "email": "developers@archipro.co.nz"
+                    "email": "developer@archipro.co.nz"
                 }
             ],
-            "description": "PSR-14 Event Dispatcher implementation using Revolt and AMPHP",
+            "description": "Silverstripe CMS module for managing .well-known directory endpoints",
             "support": {
-                "issues": "https://github.com/archiprocode/revolt-event-dispatcher/issues",
-                "source": "https://github.com/archiprocode/revolt-event-dispatcher/tree/0.1.0"
+                "issues": "https://github.com/archiprocode/silverstripe-well-known/issues",
+                "source": "https://github.com/archiprocode/silverstripe-well-known/tree/0.0.0"
             },
-            "time": "2024-12-13T01:17:30+00:00"
-        },
-        {
-            "name": "archipro/silverstripe-revolt-event-dispatcher",
-            "version": "0.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/archiprocode/silverstripe-revolt-event-dispatcher.git",
-                "reference": "a24af9a32b744e0cd4470d45d24167c9f4d5b4bd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/archiprocode/silverstripe-revolt-event-dispatcher/zipball/a24af9a32b744e0cd4470d45d24167c9f4d5b4bd",
-                "reference": "a24af9a32b744e0cd4470d45d24167c9f4d5b4bd",
-                "shasum": ""
-            },
-            "require": {
-                "archipro/revolt-event-dispatcher": "^0.1.0",
-                "php": "^8.1",
-                "psr/event-dispatcher": "^1.0",
-                "psr/event-dispatcher-implementation": "^1.0",
-                "psr/log": "^1 || ^2 || ^3",
-                "silverstripe/framework": "^4.13 || ^5.0",
-                "silverstripe/versioned": "^1.13 || ^2.0"
-            },
-            "require-dev": {
-                "colinodell/psr-testlogger": "^1.0",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.0"
-            },
-            "suggest": {
-                "colinodell/psr-testlogger": "To use the TestEventService, you must require the 'colinodell/psr-testlogger' package in your dev dependencies."
-            },
-            "default-branch": true,
-            "type": "silverstripe-vendormodule",
-            "extra": {
-                "expose": []
-            },
-            "autoload": {
-                "psr-4": {
-                    "ArchiPro\\Silverstripe\\EventDispatcher\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A Revolt Event Dispatcher integration for Silverstripe CMS",
-            "support": {
-                "issues": "https://github.com/archiprocode/silverstripe-revolt-event-dispatcher/issues",
-                "source": "https://github.com/archiprocode/silverstripe-revolt-event-dispatcher/tree/a24af9a32b744e0cd4470d45d24167c9f4d5b4bd"
-            },
-            "time": "2026-09-11T01:02:18+00:00"
+            "time": "2025-10-17T00:28:26+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -2374,78 +2235,6 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
-        },
-        {
-            "name": "revolt/event-loop",
-            "version": "v1.0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "44061cf513e53c6200372fc935ac42271566295d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/44061cf513e53c6200372fc935ac42271566295d",
-                "reference": "44061cf513e53c6200372fc935ac42271566295d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "ext-json": "*",
-                "jetbrains/phpstorm-stubs": "^2019.3",
-                "phpunit/phpunit": "^9",
-                "psalm/phar": "6.16.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Revolt\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aaron Piotrowski",
-                    "email": "aaron@trowski.com"
-                },
-                {
-                    "name": "Cees-Jan Kiewiet",
-                    "email": "ceesjank@gmail.com"
-                },
-                {
-                    "name": "Christian Lück",
-                    "email": "christian@clue.engineering"
-                },
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                }
-            ],
-            "description": "Rock-solid event loop for concurrent PHP applications.",
-            "keywords": [
-                "async",
-                "asynchronous",
-                "concurrency",
-                "event",
-                "event-loop",
-                "non-blocking",
-                "scheduler"
-            ],
-            "support": {
-                "issues": "https://github.com/revoltphp/event-loop/issues",
-                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.9"
-            },
-            "time": "2026-05-16T17:55:38+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -8171,7 +7960,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "archipro/silverstripe-revolt-event-dispatcher": 20,
         "silverstripe-themes/simple": 20,
         "silverstripe/login-forms": 20,
         "silverstripe/recipe-cms": 20,

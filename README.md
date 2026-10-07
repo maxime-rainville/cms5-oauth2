@@ -2,7 +2,7 @@
 
 A small Silverstripe 5 app where we build a reusable **OAuth2 authorization server**: this host issues tokens to apps, rather than acting as an OAuth client of someone else.
 
-The intended foundations are [`league/oauth2-server`](https://oauth2.thephpleague.com/) (protocol) and [`archipro/silverstripe-wellknown`](https://github.com/archiprocode/silverstripe-well-known) (discovery and JWKS). This installer does not require those packages yet; [ROADMAP.md](ROADMAP.md) is the scope and sequence, including the step that adds them.
+This installer already requires [`archipro/silverstripe-wellknown`](https://github.com/archiprocode/silverstripe-well-known), which registers the `/.well-known/*` route surface. Discovery and JWKS documents need providers (still on the roadmap). [`league/oauth2-server`](https://oauth2.thephpleague.com/) (protocol) is not required yet; [ROADMAP.md](ROADMAP.md) is the scope and sequence for the remaining steps.
 
 ArchiPro already has outbound OAuth **clients** (for example Xero under `app/src/Component/Integration/Xero/` in [archipro-website](https://github.com/archiprocode/archipro-website)). Those use `league/oauth2-client` and are unrelated to this server. This app is where the shared **server** shape is tried before anything is installed on the website.
 
