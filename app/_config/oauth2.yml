@@ -1,0 +1,42 @@
+---
+Name: oauth2
+After:
+  - '#wellknown'
+---
+# OAuth2 settings and JWKS wiring. An empty public-key path is omitted so CI
+# can boot with an empty JWKS. A path that is set but unreadable fails closed.
+# Key paths, passphrase, encryption key, and issuer are backtick env names.
+# Path prefix and token lifetimes stay as PHP defaults so an unset env var
+# does not wipe them.
+SilverStripe\Core\Injector\Injector:
+  Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair:
+    constructor:
+      private_key_path: '`OAUTH2_PRIVATE_KEY_PATH`'
+      public_key_path: '`OAUTH2_PUBLIC_KEY_PATH`'
+      passphrase: '`OAUTH2_PRIVATE_KEY_PASSPHRASE`'
+
+  # Concrete class and interface both need the constructor. ::create() reads the
+  # class spec; singleton(interface) reads the interface spec.
+  Archipro\SilverstripeOAuth2\Settings\EnvironmentOAuth2Settings:
+    constructor:
+      keyPair: '%$Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair'
+      encryptionKey: '`OAUTH2_ENCRYPTION_KEY`'
+      issuer: '`OAUTH2_ISSUER`'
+
+  Archipro\SilverstripeOAuth2\Settings\OAuth2SettingsInterface:
+    class: Archipro\SilverstripeOAuth2\Settings\EnvironmentOAuth2Settings
+    constructor:
+      keyPair: '%$Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair'
+      encryptionKey: '`OAUTH2_ENCRYPTION_KEY`'
+      issuer: '`OAUTH2_ISSUER`'
+
+  Archipro\SilverstripeWellKnown\Providers\JsonWebKeySetProvider:
+    class: Archipro\SilverstripeOAuth2\Discovery\PublishedJsonWebKeySetProvider
+    constructor:
+      -
+        - '%$Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair'
+
+  Archipro\SilverstripeWellKnown\Controllers\WellKnownController:
+    properties:
+      providers:
+        - '%$Archipro\SilverstripeWellKnown\Providers\JsonWebKeySetProvider'

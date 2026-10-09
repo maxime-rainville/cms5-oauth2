@@ -12,11 +12,14 @@
 
     <rule ref="PSR12"/>
 
-    <!-- Installer Page classes stay in the global namespace (Silverstripe convention). -->
+    <!-- Installer Page classes and suite smoke tests stay global (Silverstripe convention). -->
     <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
         <exclude-pattern>app/src/Page.php</exclude-pattern>
         <exclude-pattern>app/src/PageController.php</exclude-pattern>
         <exclude-pattern>app/tests/SmokeTest.php</exclude-pattern>
+        <exclude-pattern>app/tests/OAuth2SettingsTest.php</exclude-pattern>
+        <exclude-pattern>app/tests/RsaPublicJsonWebKeyTest.php</exclude-pattern>
+        <exclude-pattern>app/tests/PublishedJsonWebKeySetProviderTest.php</exclude-pattern>
     </rule>
 
     <!-- Silverstripe template actions such as Form() keep their CMS names. -->
