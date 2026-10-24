@@ -20,6 +20,8 @@
         <exclude-pattern>app/tests/OAuth2SettingsTest.php</exclude-pattern>
         <exclude-pattern>app/tests/RsaPublicJsonWebKeyTest.php</exclude-pattern>
         <exclude-pattern>app/tests/JwksDocumentTest.php</exclude-pattern>
+        <exclude-pattern>app/tests/OAuthClientTest.php</exclude-pattern>
+        <exclude-pattern>app/tests/ScopeTest.php</exclude-pattern>
     </rule>
 
     <!-- Silverstripe template actions such as Form() keep their CMS names. -->
