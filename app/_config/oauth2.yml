@@ -1,0 +1,35 @@
+---
+Name: oauth2
+After:
+  - '#wellknown'
+---
+# OAuth2 settings and JWKS wiring. The JWKS publishes the active signing pair,
+# so the public key path must name a usable file before that endpoint answers.
+# The private key loads on first getPrivateKey() (signing), not for JWKS.
+# Key paths, passphrase, encryption key, and issuer are backtick env names.
+# Path prefix and token lifetimes stay as PHP defaults so an unset env var
+# does not wipe them.
+SilverStripe\Core\Injector\Injector:
+  Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair:
+    constructor:
+      private_key_path: '`OAUTH2_PRIVATE_KEY_PATH`'
+      public_key_path: '`OAUTH2_PUBLIC_KEY_PATH`'
+      passphrase: '`OAUTH2_PRIVATE_KEY_PASSPHRASE`'
+
+  # singleton(OAuth2SettingsInterface::class) reads this constructor.
+  Archipro\SilverstripeOAuth2\Settings\OAuth2SettingsInterface:
+    class: Archipro\SilverstripeOAuth2\Settings\EnvironmentOAuth2Settings
+    constructor:
+      signingKey: '%$Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair'
+      encryptionKey: '`OAUTH2_ENCRYPTION_KEY`'
+      issuer: '`OAUTH2_ISSUER`'
+
+  Archipro\SilverstripeWellKnown\Providers\JsonWebKeySetProvider:
+    constructor:
+      keys:
+        - '%$Archipro\SilverstripeOAuth2\Discovery\RsaKeyPair'
+
+  Archipro\SilverstripeWellKnown\Controllers\WellKnownController:
+    properties:
+      providers:
+        - '%$Archipro\SilverstripeWellKnown\Providers\JsonWebKeySetProvider'
