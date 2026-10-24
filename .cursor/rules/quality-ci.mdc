@@ -31,7 +31,7 @@ Composer equivalents: `ddev composer test`, `ddev composer phpstan`, `ddev compo
 
 ## CI
 
-GitHub Actions is `.github/workflows/ci.yml`. It uses `silverstripe/gha-ci` with one PHP 8.3 + MySQL 8.0 job: PHPUnit and PHP lint (phpcs then phpstan). End-to-end, JS, and doclint jobs are off.
+GitHub Actions is `.github/workflows/ci.yml`. It uses `silverstripe/gha-ci` with one PHP 8.3 + MySQL 8.0 job: PHPUnit and PHP lint (phpcs then phpstan). End-to-end, JS, and doclint jobs are off. CI omits `composer_install`, so Composer resolves with `composer update` rather than a lockfile-faithful `--prefer-source` install. Local `ddev composer install` is unchanged.
 
 Do not add a PHPStan baseline file. Fix `app/` instead.
 
