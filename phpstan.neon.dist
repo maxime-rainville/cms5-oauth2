@@ -3,3 +3,9 @@ parameters:
   paths:
     - app/src
     - app/tests
+
+  # Tests may construct an Injectable class with new.
+  ignoreErrors:
+    -
+      identifier: silverstan.injectable.useCreate
+      path: app/tests
