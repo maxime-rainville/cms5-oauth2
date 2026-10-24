@@ -1,0 +1,18 @@
+---
+description: How to write README chapters that teach a feature in this sandbox.
+alwaysApply: true
+---
+
+# Teaching README chapters
+
+When a change adds or changes behaviour a host has to configure, document it in `README.md` as a feature chapter. Unfinished sequence stays in `ROADMAP.md`.
+
+Each feature chapter has three parts, in this order:
+
+1. **What it is for.** A short explanation of the behaviour that exists today.
+2. **How to set it up.** The files, env names, and commands a host uses. Where YAML backticks supply a value, name that variable. Do not tell the reader to read it with `Environment::getEnv()` in PHP.
+3. **Which type to replace.** The Injector service a host rebinds to another class when the default is not enough. Name that service. A final class that is only configured with env paths belongs in setup, not in this part.
+
+Write only behaviour this repository implements. If a step is still on the roadmap, link `ROADMAP.md` instead of describing the handshake.
+
+Do not add a chapter for grants, PKCE, clients, or consent until that behaviour exists in this app.
