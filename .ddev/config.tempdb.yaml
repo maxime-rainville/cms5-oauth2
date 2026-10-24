@@ -1,0 +1,5 @@
+# Allow SapphireTest to create and drop temporary databases (ss_tmpdb_*).
+hooks:
+  post-start:
+    - exec-host: |
+        ddev mysql -uroot -proot -e "GRANT CREATE, DROP ON *.* TO 'db'@'%'; GRANT ALL PRIVILEGES ON \`ss_tmpdb_%\`.* TO 'db'@'%'; FLUSH PRIVILEGES;"
