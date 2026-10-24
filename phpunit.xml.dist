@@ -15,4 +15,16 @@
             <directory>app/tests</directory>
         </testsuite>
     </testsuites>
+    <!--
+        Test-only OAuth2 env for the whole suite. force="true" wins over a local
+        .env because Silverstripe's loader skips variables already set in the process.
+        The Defuse key is generated for tests only; never reuse it outside PHPUnit.
+    -->
+    <php>
+        <env name="OAUTH2_PRIVATE_KEY_PATH" value="app/tests/fixtures/oauth2/test-private.pem" force="true"/>
+        <env name="OAUTH2_PUBLIC_KEY_PATH" value="app/tests/fixtures/oauth2/test-public.pem" force="true"/>
+        <env name="OAUTH2_PRIVATE_KEY_PASSPHRASE" value="" force="true"/>
+        <env name="OAUTH2_ENCRYPTION_KEY" value="def000009968ece24ab1f567212f4d7e233c2df076070e1f5a366add8731819f2b05da5e4c2d31ef749ab733c79e91ea633886f29839efd3cd7170201adeb0333f7b2d68" force="true"/>
+        <env name="OAUTH2_ISSUER" value="https://oauth2.test" force="true"/>
+    </php>
 </phpunit>
