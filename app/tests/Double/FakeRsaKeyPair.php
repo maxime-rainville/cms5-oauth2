@@ -52,6 +52,21 @@ class FakeRsaKeyPair extends RsaKeyPair
     }
 
     /**
+     * Public PEM for the in-memory pair, for JWT verify in tests.
+     *
+     * @return non-empty-string
+     */
+    public static function getPublicPem(): string
+    {
+        self::ensurePair();
+        if (self::$publicPem === null || self::$publicPem === '') {
+            throw new RuntimeException('In-memory public key is missing.');
+        }
+
+        return self::$publicPem;
+    }
+
+    /**
      * Generate the shared pair once per process.
      */
     private static function ensurePair(): void
